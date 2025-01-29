@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C4C5503F-906E-4389-A294-FD2812688267}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="packages\d22\OpenCodeList.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="test\dunitx\OpenCodeList.UnitTest.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="OpenCodeList">
+        <MSBuild Projects="packages\d22\OpenCodeList.dproj"/>
+    </Target>
+    <Target Name="OpenCodeList:Clean">
+        <MSBuild Projects="packages\d22\OpenCodeList.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OpenCodeList:Make">
+        <MSBuild Projects="packages\d22\OpenCodeList.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OpenCodeList_UnitTest">
+        <MSBuild Projects="test\dunitx\OpenCodeList.UnitTest.dproj"/>
+    </Target>
+    <Target Name="OpenCodeList_UnitTest:Clean">
+        <MSBuild Projects="test\dunitx\OpenCodeList.UnitTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OpenCodeList_UnitTest:Make">
+        <MSBuild Projects="test\dunitx\OpenCodeList.UnitTest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="OpenCodeList;OpenCodeList_UnitTest"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="OpenCodeList:Clean;OpenCodeList_UnitTest:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="OpenCodeList:Make;OpenCodeList_UnitTest:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

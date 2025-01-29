@@ -1,0 +1,84 @@
+package OpenCodeList;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'A document parser and builder for the OpenCodeList project'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  RESTComponents;
+
+contains
+  OpenCodeList.PropertyNames in '..\..\src\Dictionaries\OpenCodeList.PropertyNames.pas',
+  OpenCodeList.TypeConsts in '..\..\src\Dictionaries\OpenCodeList.TypeConsts.pas',
+  OpenCodeList.IdentifierSource in '..\..\src\Models\OpenCodeList.IdentifierSource.pas',
+  OpenCodeList.DateTimeUtils in '..\..\src\Utils\OpenCodeList.DateTimeUtils.pas',
+  OpenCodeList.Identifier in '..\..\src\Models\OpenCodeList.Identifier.pas',
+  OpenCodeList.JsonHelper in '..\..\src\ClassHelpers\OpenCodeList.JsonHelper.pas',
+  OpenCodeList.Annotation in '..\..\src\Models\OpenCodeList.Annotation.pas',
+  OpenCodeList.Description in '..\..\src\Models\OpenCodeList.Description.pas',
+  OpenCodeList.Identification in '..\..\src\Models\OpenCodeList.Identification.pas',
+  OpenCodeList.Publisher in '..\..\src\Models\OpenCodeList.Publisher.pas',
+  OpenCodeList.LocalizedUri in '..\..\src\Models\OpenCodeList.LocalizedUri.pas',
+  OpenCodeList.MimeTypedUri in '..\..\src\Models\OpenCodeList.MimeTypedUri.pas',
+  OpenCodeList.BaseObjects in '..\..\src\Models\OpenCodeList.BaseObjects.pas',
+  OpenCodeList.Column in '..\..\src\Models\OpenCodeList.Column.pas',
+  OpenCodeList.BooleanColumn in '..\..\src\Models\OpenCodeList.BooleanColumn.pas',
+  OpenCodeList.Nullable in '..\..\src\Utils\OpenCodeList.Nullable.pas',
+  OpenCodeList.Document in '..\..\src\OpenCodeList.Document.pas',
+  OpenCodeList.CodeListDocument in '..\..\src\OpenCodeList.CodeListDocument.pas',
+  OpenCodeList.CodeListSetDocument in '..\..\src\OpenCodeList.CodeListSetDocument.pas',
+  OpenCodeList.ForeignKey in '..\..\src\Models\OpenCodeList.ForeignKey.pas',
+  OpenCodeList.Key in '..\..\src\Models\OpenCodeList.Key.pas',
+  OpenCodeList.KeyRef in '..\..\src\Models\OpenCodeList.KeyRef.pas',
+  OpenCodeList.StringColumn in '..\..\src\Models\OpenCodeList.StringColumn.pas',
+  OpenCodeList.ObjectList in '..\..\src\Utils\OpenCodeList.ObjectList.pas',
+  OpenCodeList.Row in '..\..\src\Models\OpenCodeList.Row.pas',
+  OpenCodeList.Columns in '..\..\src\Models\OpenCodeList.Columns.pas',
+  OpenCodeList.DocumentRef in '..\..\src\Models\OpenCodeList.DocumentRef.pas',
+  OpenCodeList.CodeListDocumentRef in '..\..\src\Models\OpenCodeList.CodeListDocumentRef.pas',
+  OpenCodeList.CodeListSetDocumentRef in '..\..\src\Models\OpenCodeList.CodeListSetDocumentRef.pas',
+  OpenCodeList.ForeignKeys in '..\..\src\Models\OpenCodeList.ForeignKeys.pas',
+  OpenCodeList.Keys in '..\..\src\Models\OpenCodeList.Keys.pas',
+  OpenCodeList.Rows in '..\..\src\Models\OpenCodeList.Rows.pas',
+  OpenCodeList.CodeListParserException in '..\..\src\OpenCodeList.CodeListParserException.pas',
+  OpenCodeList.DocumentRefs in '..\..\src\Models\OpenCodeList.DocumentRefs.pas',
+  OpenCodeList.DocumentLoader in '..\..\src\OpenCodeList.DocumentLoader.pas',
+  OpenCodeList.DateOnlyColumn in '..\..\src\Models\OpenCodeList.DateOnlyColumn.pas',
+  OpenCodeList.DateTimeColumn in '..\..\src\Models\OpenCodeList.DateTimeColumn.pas',
+  OpenCodeList.EnumColumn in '..\..\src\Models\OpenCodeList.EnumColumn.pas',
+  OpenCodeList.EnumMember in '..\..\src\Models\OpenCodeList.EnumMember.pas',
+  OpenCodeList.EnumSetColumn in '..\..\src\Models\OpenCodeList.EnumSetColumn.pas',
+  OpenCodeList.TimeOnlyColumn in '..\..\src\Models\OpenCodeList.TimeOnlyColumn.pas',
+  OpenCodeList.IntegerColumn in '..\..\src\Models\OpenCodeList.IntegerColumn.pas',
+  OpenCodeList.JsonColumn in '..\..\src\Models\OpenCodeList.JsonColumn.pas',
+  OpenCodeList.NumberColumn in '..\..\src\Models\OpenCodeList.NumberColumn.pas',
+  OpenCodeList.Values in '..\..\src\Models\OpenCodeList.Values.pas',
+  OpenCodeList.SemanticVersion in '..\..\src\Utils\OpenCodeList.SemanticVersion.pas';
+
+end.
