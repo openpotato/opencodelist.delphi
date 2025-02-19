@@ -35,7 +35,7 @@ type
   public
 
     /// <summary>
-    /// Returns The supported OpenCodeList version.
+    /// Returns the supported OpenCodeList version.
     /// </summary>
     /// <returns>A OpenCodeList version</returns>
     class function GetVersion: TSemanticVersion;
@@ -184,7 +184,7 @@ end;
 
 class function TDocument.GetVersion: TSemanticVersion;
 begin
-  Result := TSemanticVersion.Create(0, 2, 0);
+  Result := TSemanticVersion.Create(0, 3, 0);
 end;
 
 end.

@@ -230,10 +230,10 @@ begin
     if JsonObjectToBeParsed.TryGetJsonString(TPropertyNames.ValidTo, JsonString) then
       Result.ValidTo := ISO8601StrToDateTime(JsonString.Value);
 
-    if JsonObjectToBeParsed.TryGetJsonString(TPropertyNames.CanonicalUri, JsonString) then
+    if JsonObjectToBeParsed.GetRequiredJsonString(TPropertyNames.CanonicalUri, JsonString) then
       Result.CanonicalUri := TURI.Create(JsonString.Value);
 
-    if JsonObjectToBeParsed.TryGetJsonString(TPropertyNames.CanonicalVersionUri, JsonString) then
+    if JsonObjectToBeParsed.GetRequiredJsonString(TPropertyNames.CanonicalVersionUri, JsonString) then
       Result.CanonicalVersionUri := TURI.Create(JsonString.Value);
 
     if JsonObjectToBeParsed.GetRequiredJsonArray(TPropertyNames.LocationUrls, JsonArray) then
