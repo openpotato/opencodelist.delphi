@@ -60,7 +60,7 @@ begin
   Result := TCodeListDocumentRef.Create;
   try
 
-    if JsonObjectToBeParsed.TryGetJsonString(TPropertyNames.CanonicalUri, JsonString) then
+    if JsonObjectToBeParsed.GetRequiredJsonString(TPropertyNames.CanonicalUri, JsonString) then
       Result.CanonicalUri := TURI.Create(JsonString.Value);
 
     if JsonObjectToBeParsed.TryGetJsonString(TPropertyNames.CanonicalVersionUri, JsonString) then
