@@ -109,9 +109,9 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="TestCodeListDocument.pas"/>
-        <DCCReference Include="TestCodeListSetDocument.pas"/>
-        <DCCReference Include="TestDocumentLoader.pas"/>
+        <DCCReference Include="CodeListDocumentTests.pas"/>
+        <DCCReference Include="CodeListSetDocumentTests.pas"/>
+        <DCCReference Include="DocumentLoaderTests.pas"/>
         <None Include="Assets\codelist.json"/>
         <None Include="Assets\codelist.meta.json"/>
         <None Include="Assets\codelistset.json"/>
@@ -1118,7 +1118,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>xcopy &quot;$(PROJECTDIR)\Assets\*&quot; &quot;$(OUTPUTDIR)Assets&quot; /I /E /Y</PostBuildEvent>
+        <PostBuildEvent>xcopy &quot;$(PROJECTDIR)\Assets\*&quot; &quot;$(OUTPUTDIR)Assets&quot; /I /E /Y</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Debug' And '$(Platform)'=='Win64'">
@@ -1126,7 +1126,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>xcopy &quot;$(PROJECTDIR)\Assets\*&quot; &quot;$(OUTPUTDIR)Assets&quot; /I /E /Y</PostBuildEvent>
+        <PostBuildEvent>xcopy &quot;$(PROJECTDIR)\Assets\*&quot; &quot;$(OUTPUTDIR)Assets&quot; /I /E /Y</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
@@ -1134,7 +1134,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>xcopy &quot;$(PROJECTDIR)\Assets\*&quot; &quot;$(OUTPUTDIR)Assets&quot; /I /E /Y</PostBuildEvent>
+        <PostBuildEvent>xcopy &quot;$(PROJECTDIR)\Assets\*&quot; &quot;$(OUTPUTDIR)Assets&quot; /I /E /Y</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win64'">
@@ -1142,7 +1142,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>xcopy &quot;$(PROJECTDIR)\Assets\*&quot; &quot;$(OUTPUTDIR)Assets&quot; /I /E /Y</PostBuildEvent>
+        <PostBuildEvent>xcopy &quot;$(PROJECTDIR)\Assets\*&quot; &quot;$(OUTPUTDIR)Assets&quot; /I /E /Y</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>

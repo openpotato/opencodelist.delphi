@@ -48,13 +48,16 @@ type
     procedure AddTimeOnlyOrNothing(const PropertyName: string; const NullableValue: Nullable<TTime>); overload;
     procedure AddUri(const PropertyName: string; Value: TUri);
     procedure AddUriOrNothing(const PropertyName: string; const NullableValue: Nullable<TUri>);
+    procedure AddUriArray(const PropertyName: string; List: TList<TUri>);
+    procedure AddUriArrayOrNothing(const PropertyName: string; List: TList<TUri>);
+    procedure AddStringList(const PropertyName: string; List: TStrings);
+    procedure AddStringListOrNothing(const PropertyName: string; List: TStrings);
+    procedure AddStringArray(const PropertyName: string; List: TList<string>);
+    procedure AddStringArrayOrNothing(const PropertyName: string; List: TList<string>);
     procedure AddObject(const PropertyName: string; const AnObject: TJSONObject); overload;
     procedure AddObject<T: TBaseObject>(const PropertyName: string; Value: T); overload;
     procedure AddObjectArray(const PropertyName: string; List: TJSONArray); overload;
     procedure AddObjectArray<T: TBaseObject>(const PropertyName: string; List: TList<T>); overload;
-    procedure AddStringList(const PropertyName: string; List: TStrings);
-    procedure AddStringArray(const PropertyName: string; List: TList<string>);
-    procedure AddUriArray(const PropertyName: string; List: TList<TUri>);
     procedure AddColumnIdArray(const PropertyName: string; Columns: TColumns);
     procedure AddEnumMemberArray(const PropertyName: string; List: TList<TEnumMember>);
 
@@ -157,12 +160,45 @@ begin
   if NullableValue.HasValue then AddUri(PropertyName, NullableValue.Value);
 end;
 
-procedure TJsonObjectHelper.AddObject(const PropertyName: string; const AnObject: TJSONObject);
+procedure TJsonObjectHelper.AddUriArray(const PropertyName: string; List: TList<TUri>);
 begin
-  if AnObject <> nil then AddPair(PropertyName, AnObject);
+  if List.Count > 0 then
+    AddUriArrayOrNothing(PropertyName, List)
+  else
+    AddPair(PropertyName, TJSONNull.Create);
+end;
+
+procedure TJsonObjectHelper.AddUriArrayOrNothing(const PropertyName: string; List: TList<TUri>);
+begin
+  if List.Count > 0 then
+  begin
+    var JsonArray := TJSONArray.Create;
+    try
+      for var UriItem in List do
+      begin
+        var JsonString := TJSONString.Create(UriItem.ToString);
+        try
+          JsonArray.AddElement(JsonString);
+        except
+          JsonString.Free; raise;
+        end;
+      end;
+      AddPair(PropertyName, JsonArray);
+    except
+      JsonArray.Free; raise;
+    end;
+  end;
 end;
 
 procedure TJsonObjectHelper.AddStringArray(const PropertyName: string; List: TList<string>);
+begin
+  if List.Count > 0 then
+    AddStringArrayOrNothing(PropertyName, List)
+  else
+    AddPair(PropertyName, TJSONNull.Create);
+end;
+
+procedure TJsonObjectHelper.AddStringArrayOrNothing(const PropertyName: string; List: TList<string>);
 begin
   if List.Count > 0 then
   begin
@@ -181,23 +217,77 @@ begin
     except
       JsonArray.Free; raise;
     end;
-  end else
+  end;
+end;
+
+procedure TJsonObjectHelper.AddStringList(const PropertyName: string; List: TStrings);
+begin
+  if List.Count > 0 then
+    AddStringListOrNothing(PropertyName, List)
+  else
     AddPair(PropertyName, TJSONNull.Create);
 end;
 
-procedure TJsonObjectHelper.AddUriArray(const PropertyName: string; List: TList<TUri>);
+procedure TJsonObjectHelper.AddStringListOrNothing(const PropertyName: string; List: TStrings);
 begin
   if List.Count > 0 then
   begin
     var JsonArray := TJSONArray.Create;
     try
-      for var UriItem in List do
+      for var S in List do
       begin
-        var JsonString := TJSONString.Create(UriItem.ToString);
+        var JsonString := TJSONString.Create(S);
         try
           JsonArray.AddElement(JsonString);
         except
           JsonString.Free; raise;
+        end;
+      end;
+      AddPair(PropertyName, JsonArray);
+    except
+      JsonArray.Free; raise;
+    end;
+  end;
+end;
+
+procedure TJsonObjectHelper.AddObject(const PropertyName: string; const AnObject: TJSONObject);
+begin
+  if AnObject <> nil then AddPair(PropertyName, AnObject);
+end;
+
+procedure TJsonObjectHelper.AddObject<T>(const PropertyName: string; Value: T);
+begin
+  if Value <> nil then
+  begin
+    var JsonObject := TJSONObject.Create;
+    try
+      Value.WriteTo(JsonObject);
+      AddPair(PropertyName, JsonObject);
+    except
+      JsonObject.Free; raise;
+    end;
+  end;
+end;
+
+procedure TJsonObjectHelper.AddObjectArray(const PropertyName: string; List: TJSONArray);
+begin
+  if List <> nil then AddPair(PropertyName, List);
+end;
+
+procedure TJsonObjectHelper.AddObjectArray<T>(const PropertyName: string; List: TList<T>);
+begin
+  if List.Count > 0 then
+  begin
+    var JsonArray := TJSONArray.Create;
+    try
+      for var ListItem in List do
+      begin
+        var JsonObject := TJSONObject.Create;
+        try
+          ListItem.WriteTo(JsonObject);
+          JsonArray.AddElement(JsonObject);
+        except
+          JsonObject.Free; raise;
         end;
       end;
       AddPair(PropertyName, JsonArray);
@@ -231,7 +321,6 @@ begin
     AddPair(PropertyName, TJSONNull.Create);
 end;
 
-
 procedure TJsonObjectHelper.AddEnumMemberArray(const PropertyName: string; List: TList<TEnumMember>);
 begin
   if List.Count > 0 then
@@ -254,72 +343,6 @@ begin
     end;
   end else
     AddPair(PropertyName, TJSONNull.Create);
-end;
-
-procedure TJsonObjectHelper.AddStringList(const PropertyName: string; List: TStrings);
-begin
-  if List.Count > 0 then
-  begin
-    var JsonArray := TJSONArray.Create;
-    try
-      for var S in List do
-      begin
-        var JsonString := TJSONString.Create(S);
-        try
-          JsonArray.AddElement(JsonString);
-        except
-          JsonString.Free; raise;
-        end;
-      end;
-      AddPair(PropertyName, JsonArray);
-    except
-      JsonArray.Free; raise;
-    end;
-  end else
-    AddPair(PropertyName, TJSONNull.Create);
-end;
-
-procedure TJsonObjectHelper.AddObjectArray(const PropertyName: string; List: TJSONArray);
-begin
-  if List <> nil then AddPair(PropertyName, List);
-end;
-
-procedure TJsonObjectHelper.AddObjectArray<T>(const PropertyName: string; List: TList<T>);
-begin
-  if List.Count > 0 then
-  begin
-    var JsonArray := TJSONArray.Create;
-    try
-      for var ListItem in List do
-      begin
-        var JsonObject := TJSONObject.Create;
-        try
-          ListItem.WriteTo(JsonObject);
-          JsonArray.AddElement(JsonObject);
-        except
-          JsonObject.Free; raise;
-        end;
-      end;
-      AddPair(PropertyName, JsonArray);
-    except
-      JsonArray.Free; raise;
-    end;
-  end else
-    AddPair(PropertyName, TJSONNull.Create);
-end;
-
-procedure TJsonObjectHelper.AddObject<T>(const PropertyName: string; Value: T);
-begin
-  if Value <> nil then
-  begin
-    var JsonObject := TJSONObject.Create;
-    try
-      Value.WriteTo(JsonObject);
-      AddPair(PropertyName, JsonObject);
-    except
-      JsonObject.Free; raise;
-    end;
-  end;
 end;
 
 function TJsonObjectHelper.GetRequiredJsonString(const PropertyName: string; out StringValue: TJSONString): Boolean;

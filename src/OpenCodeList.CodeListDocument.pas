@@ -303,7 +303,7 @@ begin
   Result := TCodeListDocument.Create;
   try
 
-    if JsonRootToBeParsed.GetRequiredJsonArray(TPropertyNames.Comments, JsonArray) then
+    if JsonRootToBeParsed.TryGetJsonArray(TPropertyNames.Comments, JsonArray) then
     begin
       for var ArrayElement in JsonArray do
       begin

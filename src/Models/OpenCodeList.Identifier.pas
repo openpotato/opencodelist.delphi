@@ -73,7 +73,7 @@ begin
   Result := TIdentifier.Create;
   try
 
-    if JsonObjectToBeParsed.GetRequiredJsonString(TPropertyNames.value, JsonString) then
+    if JsonObjectToBeParsed.GetRequiredJsonString(TPropertyNames.Value, JsonString) then
       Result.Value := JsonString.Value;
 
     if JsonObjectToBeParsed.TryGetJsonObject(TPropertyNames.Source, JsonObject) then
