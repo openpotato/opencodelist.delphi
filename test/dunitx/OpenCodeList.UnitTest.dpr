@@ -13,9 +13,9 @@ uses
   DUnitX.Loggers.Xml.NUnit,
   {$ENDIF }
   DUnitX.TestFramework,
-  TestCodeListDocument in 'TestCodeListDocument.pas',
-  TestCodeListSetDocument in 'TestCodeListSetDocument.pas',
-  TestDocumentLoader in 'TestDocumentLoader.pas';
+  CodeListDocumentTests in 'CodeListDocumentTests.pas',
+  CodeListSetDocumentTests in 'CodeListSetDocumentTests.pas',
+  DocumentLoaderTests in 'DocumentLoaderTests.pas';
 
 {$IFNDEF TESTINSIGHT}
 var

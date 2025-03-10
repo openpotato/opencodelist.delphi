@@ -39,8 +39,8 @@ type
     FPublishedAt: Nullable<TDateTime>;
     FValidFrom: Nullable<TDateTime>;
     FValidTo: Nullable<TDateTime>;
-    FCanonicalUri: Nullable<TUri>;
-    FCanonicalVersionUri: TUri;
+    FCanonicalUri: TUri;
+    FCanonicalVersionUri: Nullable<TUri>;
     FLocationUrls: TList<TUri>;
     FAlternateLanguageLocations: TObjectList<TLocalizedUri>;
     FAlternateFormatLocations: TObjectList<TMimeTypedUri>;
@@ -123,12 +123,12 @@ type
     /// <summary>
     /// Canonical URI which uniquely identifies all versions (collectively).
     /// </summary>
-    property CanonicalUri: Nullable<TUri> read FCanonicalUri write FCanonicalUri;
+    property CanonicalUri: TUri read FCanonicalUri write FCanonicalUri;
 
     /// <summary>
     /// Canonical URI which uniquely identifies this version.
     /// </summary>
-    property CanonicalVersionUri: TUri read FCanonicalVersionUri write FCanonicalVersionUri;
+    property CanonicalVersionUri: Nullable<TUri> read FCanonicalVersionUri write FCanonicalVersionUri;
 
     /// <summary>
     /// Suggested retrieval location for this version, in OpenCodeList format.
@@ -197,7 +197,7 @@ begin
     if JsonObjectToBeParsed.TryGetJsonString(TPropertyNames.LongName, JsonString) then
       Result.LongName := JsonString.Value;
 
-    if JsonObjectToBeParsed.GetRequiredJsonArray(TPropertyNames.Tags, JsonArray) then
+    if JsonObjectToBeParsed.TryGetJsonArray(TPropertyNames.Tags, JsonArray) then
     begin
       for var ArrayElement in JsonArray do
       begin
@@ -212,7 +212,7 @@ begin
     if JsonObjectToBeParsed.TryGetJsonString(TPropertyNames.Version, JsonString) then
       Result.Version := JsonString.Value;
 
-    if JsonObjectToBeParsed.GetRequiredJsonArray(TPropertyNames.ChangeLog, JsonArray) then
+    if JsonObjectToBeParsed.TryGetJsonArray(TPropertyNames.ChangeLog, JsonArray) then
     begin
       for var ArrayElement in JsonArray do
       begin
@@ -233,10 +233,10 @@ begin
     if JsonObjectToBeParsed.GetRequiredJsonString(TPropertyNames.CanonicalUri, JsonString) then
       Result.CanonicalUri := TURI.Create(JsonString.Value);
 
-    if JsonObjectToBeParsed.GetRequiredJsonString(TPropertyNames.CanonicalVersionUri, JsonString) then
+    if JsonObjectToBeParsed.TryGetJsonString(TPropertyNames.CanonicalVersionUri, JsonString) then
       Result.CanonicalVersionUri := TURI.Create(JsonString.Value);
 
-    if JsonObjectToBeParsed.GetRequiredJsonArray(TPropertyNames.LocationUrls, JsonArray) then
+    if JsonObjectToBeParsed.TryGetJsonArray(TPropertyNames.LocationUrls, JsonArray) then
     begin
       for var ArrayElement in JsonArray do
       begin
@@ -245,7 +245,7 @@ begin
       end;
     end;
 
-    if JsonObjectToBeParsed.GetRequiredJsonArray(TPropertyNames.AlternateLanguageLocations, JsonArray) then
+    if JsonObjectToBeParsed.TryGetJsonArray(TPropertyNames.AlternateLanguageLocations, JsonArray) then
     begin
       for var ArrayElement in JsonArray do
       begin
@@ -254,7 +254,7 @@ begin
       end;
     end;
 
-    if JsonObjectToBeParsed.GetRequiredJsonArray(TPropertyNames.AlternateFormatLocations, JsonArray) then
+    if JsonObjectToBeParsed.TryGetJsonArray(TPropertyNames.AlternateFormatLocations, JsonArray) then
     begin
       for var ArrayElement in JsonArray do
       begin
@@ -275,16 +275,16 @@ procedure TIdentification.WriteTo(JsonObject: TJSONObject);
 begin
   JsonObject.AddString(TPropertyNames.ShortName, FShortName);
   JsonObject.AddStringOrNothing(TPropertyNames.LongName, FLongName);
-  JsonObject.AddStringArray(TPropertyNames.Tags, FTags);
+  JsonObject.AddStringArrayOrNothing(TPropertyNames.Tags, FTags);
   JsonObject.AddObject(TPropertyNames.Publisher, FPublisher);
   JsonObject.AddStringOrNothing(TPropertyNames.Version, FVersion);
-  JsonObject.AddStringArray(TPropertyNames.ChangeLog, FChangeLog);
+  JsonObject.AddStringArrayOrNothing(TPropertyNames.ChangeLog, FChangeLog);
   JsonObject.AddDateTimeOrNothing(TPropertyNames.PublishedAt, FPublishedAt);
   JsonObject.AddDateTimeOrNothing(TPropertyNames.ValidFrom, FValidFrom);
   JsonObject.AddDateTimeOrNothing(TPropertyNames.ValidTo, FValidTo);
-  JsonObject.AddUriOrNothing(TPropertyNames.CanonicalUri, FCanonicalUri);
-  JsonObject.AddUri(TPropertyNames.CanonicalVersionUri, FCanonicalVersionUri);
-  JsonObject.AddUriArray(TPropertyNames.LocationUrls, FLocationUrls);
+  JsonObject.AddUri(TPropertyNames.CanonicalUri, FCanonicalUri);
+  JsonObject.AddUriOrNothing(TPropertyNames.CanonicalVersionUri, FCanonicalVersionUri);
+  JsonObject.AddUriArrayOrNothing(TPropertyNames.LocationUrls, FLocationUrls);
   JsonObject.AddObjectArray<TLocalizedUri>(TPropertyNames.AlternateLanguageLocations, FAlternateLanguageLocations);
   JsonObject.AddObjectArray<TMimeTypedUri>(TPropertyNames.AlternateFormatLocations, FAlternateFormatLocations);
   JsonObject.AddStringOrNothing(TPropertyNames.Language, FLanguage);

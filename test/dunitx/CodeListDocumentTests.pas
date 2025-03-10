@@ -8,7 +8,7 @@
 {                                                                           }
 {***************************************************************************}
 
-unit TestCodeListDocument;
+unit CodeListDocumentTests;
 
 interface
 

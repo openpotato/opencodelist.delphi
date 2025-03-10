@@ -8,7 +8,7 @@
 {                                                                           }
 {***************************************************************************}
 
-unit TestDocumentLoader;
+unit DocumentLoaderTests;
 
 interface
 
